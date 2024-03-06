@@ -1,2 +1,6 @@
 *.fish
 venv
+*.pyc
+*.pyc
+*.pyc
+blog_monoli/__pycache__
