@@ -1,0 +1,67 @@
+:root{
+	--color-point:#33b495;
+	--color-black:#000000;
+	--color-dark:#111111;
+	--color-white:#ffffff;
+	--color-light:#fafafa;
+	--color-grey:#cccccc;
+	--font-size-huge : 5rem;
+	--font-size-bigger : 2.4rem;
+	--font-size-big : 1.8rem;
+	--font-size-default : 1.6rem;
+	--font-size-small : 1.4rem;
+	--font-size-smaller : 1.2rem;
+	--container-max-width : 720px;
+}
+
+.center-content{
+	width: 90%;
+	max-width: var(--container-max-width);
+	margin:0 auto;
+}
+
+.ir-hidden{
+	position: absolute;
+	left: -9999px;
+	clip-path: circle(0,0);
+	width: 1px;
+	height: 1px;
+	overflow: hidden;
+}
+
+html{
+    height:100%;
+	font-size: 10px;
+}
+
+body{
+	height:100%;
+    display:flex;
+    flex-direction:column;
+	justify-content: space-between;
+	font-size: var(--font-size-default);
+	color: var(--color-dark);
+	background-color: var(--color-light);
+}
+
+header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+header h1{
+	color: var(--color-point);
+	font-weight: 800;
+	font-size: var(--font-size-huge);
+}
+
+header ul{
+	display: flex;
+	align-items: center;
+	gap:1rem;
+}
+
+footer{
+	background-color: #cccccc;
+}
