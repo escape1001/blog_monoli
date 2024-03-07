@@ -2,6 +2,9 @@
     <h1>
         <a href="{% url "main" %}">Blog</a>
     </h1>
+    <li>
+        <a href="{% url "post_list" %}">리스트</a>
+    </li>
     <ul>
         {% if request.user.is_authenticated %}
         <li>
