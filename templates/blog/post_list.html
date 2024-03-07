@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load blog_tags %}
 {% block content %}
 <main class="center-content">
     <form>
@@ -7,7 +8,13 @@
             {% for tag in tags %}
             <li>
                 <label for="{{tag.name}}">{{tag.name}}</label>
-                <input name="tag" type="checkbox" value="{{tag.name}}">
+                <input
+                    name="tag"
+                    type="checkbox"
+                    value="{{tag.name}}"
+                    {% parse_tag_list request as tag_list %}
+                    {% if tag.name in tag_list %}checked{% endif %}
+                >
             </li>
             {% endfor %}
         </ul>
