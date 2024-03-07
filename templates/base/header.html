@@ -14,7 +14,10 @@
             <a href="{% url "mypage" %}">마이페이지</a>
         </li>
         <li>
-            <a href="{% url "logout" %}">로그아웃</a>
+            <form action="{% url "logout" %}" method="POST">
+                {% csrf_token %}
+                <button>로그아웃</button>
+            </form>
         </li>
         {% else %}
         <li>

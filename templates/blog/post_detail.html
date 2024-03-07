@@ -32,6 +32,18 @@
                 <li>
                     {{comment.author}}
                     {{comment.contents}}
+                    {% if user == comment.author %}
+                    
+                    <form action="{% url "comment_update" comment.pk %}" method="POST">
+                        {% csrf_token %}
+                        {{form}}
+                        <button>수정하기</button>
+                    </form>
+                    <form action="{% url "comment_delete" comment.pk %}" method="POST">
+                        {% csrf_token %}
+                        <button>삭제하기</button>
+                    </form>
+                    {% endif %}
                 </li>
                 {% endfor %}
             </ul>
@@ -43,7 +55,10 @@
         </article>
     </section>
     <aside>
-        <button>좋아요</button>
+        <form action="{% url "post_like" post.pk %}" method="POST">
+            {% csrf_token %}
+            <button class="{% if liked %}liked{% endif %}">좋아요</button>
+        </form>
         <button>공유</button>
     </aside>
 </main>
