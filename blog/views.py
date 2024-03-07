@@ -51,6 +51,13 @@ class PostList(ListView):
             )
 
         return queryset
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        tags = Tag.objects.all()
+        context['tags'] = tags
+        
+        return context
 
 class PostDetail(DetailView):
     model = Post

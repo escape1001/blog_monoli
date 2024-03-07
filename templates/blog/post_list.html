@@ -1,4 +1,31 @@
 {% extends "base/base.html" %}
 {% block content %}
-<h2>post_list</h2>
+<main class="center-content">
+    <form>
+        <input name="q" placeholder="검색어를 입력하세요" value="{{ request.GET.q }}"/>
+        <ul>
+            {% for tag in tags %}
+            <li>
+                <label for="{{tag.name}}">{{tag.name}}</label>
+                <input name="tag" type="checkbox" value="{{tag.name}}">
+            </li>
+            {% endfor %}
+        </ul>
+        <button>검색</button>
+    </form>
+    <section>
+        <ul>
+            {% for post in post_list %}
+            <li>
+                <a href="{% url "post_detail" post.pk %}">
+                    {{post.title}} / {{post.author}}<br/>
+                    {% for tag in post.tags.all %}
+                    {{tag.name}}
+                    {% endfor %}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
 {% endblock %}
