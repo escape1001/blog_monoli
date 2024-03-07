@@ -4,6 +4,16 @@
     <section>
         <h2>{{post.title}}</h2>
         <p>{{post.author}} / {{post.created_at}}</p>
+        {% if user == post.author %}
+        <form action="{% url "post_update" post.pk %}" method="POST">
+            {% csrf_token %}
+            <button>수정하기</button>
+        </form>
+        <form action="{% url "post_delete" post.pk %}" method="POST">
+            {% csrf_token %}
+            <button>삭제하기</button>
+        </form>
+        {% endif %}
     </section>
     <section class="center-content">
         <h3 class="ir-hidden">포스트 영역</h3>
