@@ -9,7 +9,7 @@
     </section>
     <section class="center-content">
         <h2>최신글</h2>
-        <ul>
+        <ul class="post-list">
             {% for post in latest_list %}
             <li>
                 <a href="{% url "post_detail" post.pk %}">
@@ -21,7 +21,7 @@
     </section>
     <section class="center-content">
         <h2>인기글</h2>
-        <ul>
+        <ul class="post-list">
             {% for post in popular_list %}
             <li>
                 <a href="{% url "post_detail" post.pk %}">

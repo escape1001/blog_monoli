@@ -21,14 +21,16 @@
         <button>검색</button>
     </form>
     <section>
-        <ul>
+        <ul class="post-list">
             {% for post in post_list %}
             <li>
                 <a href="{% url "post_detail" post.pk %}">
                     {{post.title}} / {{post.author}}<br/>
-                    {% for tag in post.tags.all %}
-                    {{tag.name}}
-                    {% endfor %}
+                    <ul class="tag-list">
+                        {% for tag in post.tags.all %}
+                        <li>{{tag.name}}</li>
+                        {% endfor %}
+                    </ul>
                 </a>
             </li>
             {% endfor %}
