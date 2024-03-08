@@ -6,6 +6,9 @@ from django.shortcuts import render
 from django.views.generic import CreateView
 from blog.models import Post, Comment, Like
 from django.contrib.auth.models import User
+from django.db.models import Count
+from django.db.models import Q
+
 
 
 signup = CreateView.as_view(
@@ -38,19 +41,16 @@ def profile(request, username):
 
 @login_required
 def mypage(request):
-    posts = Post.objects.filter(author=request.user)
     comments = Comment.objects.filter(author=request.user)
-    likes = Like.objects.filter(author=request.user)
+    liked = Like.objects.filter(author=request.user).values_list('post', flat=True)
+    liked_posts = Post.objects.filter(pk__in=liked)
+    commented_my = Post.objects.filter(author=request.user).annotate(num_comments=Count('comments')).filter(num_comments__gt=0)
+    commented_myposts = Comment.objects.filter(~Q(author=request.user), post__in=commented_my)
 
     context = {
-        "posts" : posts,
         "comments" : comments,
-        "likes" : likes,
+        "liked_posts" : liked_posts,
+        "commented_myposts" : commented_myposts,
     }
 
     return render(request, 'accounts/mypage.html', context)
-
-
-
-
-# path('profile/<str:username>', views.profile, name="mypage"),
