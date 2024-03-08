@@ -27,13 +27,12 @@ logout = LogoutView.as_view(
 
 
 def profile(request, username):
-    posts = Post.objects.filter(author=username)
-    userinfo = User.objects.get(username=username)
-    
+    user_obj = User.objects.get(username=username)
+    posts = Post.objects.filter(author=user_obj)
 
     context = {
         "posts" : posts,
-        "userinfo" : userinfo,
+        "author" : user_obj,
     }
 
     return render(request, 'accounts/profile.html', context)

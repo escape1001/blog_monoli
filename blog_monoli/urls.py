@@ -27,7 +27,7 @@ urlpatterns = [
     path('posts/', blog_views.post_list, name="post_list"),
     path('post/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
-    path('profile/<str:username>/', accounts_views.profile, name="mypage"),
+    path('profile/<str:username>/', accounts_views.profile, name="profile"),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

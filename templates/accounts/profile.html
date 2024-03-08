@@ -1,0 +1,23 @@
+{% extends "base/base.html" %}
+{% block content %}
+<main class="center-content">
+    <h2>{{author.username}}의 profile</h2>
+    <section>
+        <h3>{{author.username}}이 쓴 포스트</h3>
+        <ul class="post-list">
+            {% for post in posts %}
+            <li>
+                <a href="{% url "post_detail" post.pk %}">
+                    {{post.title}} / {{post.author}}<br/>
+                    <ul class="tag-list">
+                        {% for tag in post.tags.all %}
+                        <li>{{tag.name}}</li>
+                        {% endfor %}
+                    </ul>
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
+    </section>
+</main>
+{% endblock %}

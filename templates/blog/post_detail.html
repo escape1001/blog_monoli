@@ -3,7 +3,10 @@
 <main>
     <section>
         <h2>{{post.title}}</h2>
-        <p>{{post.author}} / {{post.created_at}}</p>
+        <p>
+            <a href="{% url "profile" post.author %}">{{post.author}}</a>
+             / {{post.created_at}}
+        </p>
         {% if user == post.author %}
         <form action="{% url "post_update" post.pk %}" method="POST">
             {% csrf_token %}
