@@ -40,18 +40,22 @@ html{
 
 body{
 	height:100%;
-    display:flex;
-    flex-direction:column;
-	justify-content: space-between;
 	font-size: var(--font-size-default);
 	color: var(--color-dark);
 	background-color: var(--color-light);
 }
 
+.liked{
+	border:1px solid red;
+}
+
+
+/* 헤더 */
 header{
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+	padding:2rem 5%;
 }
 
 header h1{
@@ -64,14 +68,31 @@ header ul{
 	display: flex;
 	align-items: center;
 	gap:1rem;
+	font-size: var(--font-size-big);
 }
 
-footer{
-	background-color: #cccccc;
+header .hello{
+	padding-right: 1rem;
+	color:var(--color-point);
 }
 
-.liked{
-	border:1px solid red;
+/* 메인 */
+main{
+	min-height: 100vh;
+}
+.promo-banner img{
+	aspect-ratio: 10/3;
+	object-fit: cover;
+}
+
+.section-wrapper{
+	padding-top: 9rem;
+}
+
+.section-wrapper .title{
+	font-size: var(--font-size-bigger);
+	font-weight: 600;
+	padding-bottom: 2rem;
 }
 
 .post-list{
@@ -82,7 +103,24 @@ footer{
 
 .post-list>li{
 	border:1px solid var(--color-grey);
-	width: 33%;
+	border-radius: .5rem;
+	transition: all .2s ease-in-out;
+}
+
+.post-list>li:hover{
+	box-shadow: 0 0 1rem rgba(0,0,0,0.2);
+}
+
+.post-list>li.box3{
+	width: calc((100% - 2rem) / 3);
+}
+
+.post-list>li.box4{
+	width: calc((100% - 3rem) / 4);
+}
+
+.post-list>li a{
+	display: block;
 	padding:2rem;
 }
 
@@ -96,4 +134,10 @@ footer{
 	padding:.5rem;
 	background-color: var(--color-grey);
 	border-radius: .5rem;
+}
+
+footer{
+	margin-top: 8rem;
+	padding:3rem;
+	background-color: #cccccc;
 }

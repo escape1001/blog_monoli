@@ -4,3 +4,4 @@ venv
 *.pyc
 *.pyc
 blog_monoli/__pycache__
+*.png
