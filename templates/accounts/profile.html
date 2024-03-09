@@ -1,9 +1,14 @@
 {% extends "base/base.html" %}
 {% block content %}
 <main class="center-content">
-    <h2>{{author.username}}의 profile</h2>
+    <h2 class="section-title">{{author.username}}의 블로그</h2>
+    {% if request.user == author %}
     <section>
-        <h3>{{author.username}}이 쓴 포스트</h3>
+        <h3 class="ir-hidden">글감 추천</h3>
+    </section>
+    {% endif %}
+    <section>
+        <h3 class="ir-hidden">{{author.username}}의 포스트</h3>
         <ul class="post-list">
             {% for post in posts %}
             <li class="box3">

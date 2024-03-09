@@ -21,6 +21,11 @@
         <button>검색</button>
     </form>
     <section>
+        {% if request.GET %}
+        <h2 class="section-title">검색 결과</h2>
+        {% else %}
+        <h2 class="section-title">이런 글은 어떠세요?</h2>
+        {% endif %}
         <ul class="post-list">
             {% for post in post_list %}
             <li class="box4">

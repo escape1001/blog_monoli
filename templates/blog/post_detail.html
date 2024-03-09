@@ -24,6 +24,13 @@
     </section>
     <section class="post-area center-content">
         <h3 class="ir-hidden">포스트 영역</h3>
+        <aside>
+            <form action="{% url "post_like" post.pk %}" method="POST">
+                {% csrf_token %}
+                <button class="{% if liked %}liked{% endif %}">좋아요</button>
+            </form>
+            <button>공유</button>
+        </aside>
         <article>
             <h3 class="ir-hidden">내용</h3>
             <div class="post-contents">{{post.contents}}</div>
@@ -53,40 +60,45 @@
             </div>
         </article>
         <article class="comment-area">
-            <h3 class="section-title">덧글</h3>
+            <h3 class="section-title">덧글 {{post.comments.all.count}}</h3>
             <ul>
                 {% for comment in post.comments.all %}
                 <li>
-                    {{comment.author}}
+                    <div class="author-area">
+                        <p>
+                            <b>{{comment.author}}</b>
+                            {{comment.created_at|date:"Y-m-d"}}
+                        </p>
+                        {% if user == comment.author %}
+                        <div class="author-control">
+                            <button>수정하기</button>
+                            <form action="{% url "comment_delete" comment.pk %}" method="POST">
+                                {% csrf_token %}
+                                <button>삭제하기</button>
+                            </form>
+                        </div>
+                        {% endif %}
+                    </div>
                     {{comment.contents}}
                     {% if user == comment.author %}
-                    
-                    <form action="{% url "comment_update" comment.pk %}" method="POST">
+                    <form class="comment-update-form" action="{% url "comment_update" comment.pk %}" method="POST">
                         {% csrf_token %}
-                        {{form}}
-                        <button>수정하기</button>
-                    </form>
-                    <form action="{% url "comment_delete" comment.pk %}" method="POST">
-                        {% csrf_token %}
-                        <button>삭제하기</button>
+                        {{form.contents}}
+                        <button class="default-btn">수정 완료</button>
                     </form>
                     {% endif %}
                 </li>
                 {% endfor %}
             </ul>
-            <form method="POST">
+            <form class="comment-create-form" method="POST">
                 {% csrf_token %}
-                {{form}}
-                <button>submit</button>
+                {{form.contents}}
+                <div class="btn-area">
+                    <button class="default-btn">작성 완료</button>
+                </div>
             </form>
         </article>
+        
     </section>
-    <aside>
-        <form action="{% url "post_like" post.pk %}" method="POST">
-            {% csrf_token %}
-            <button class="{% if liked %}liked{% endif %}">좋아요</button>
-        </form>
-        <button>공유</button>
-    </aside>
 </main>
 {% endblock %}

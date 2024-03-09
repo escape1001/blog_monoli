@@ -69,13 +69,18 @@ header h1{
 header ul{
 	display: flex;
 	align-items: center;
-	gap:1rem;
+	gap:2rem;
 	font-size: var(--font-size-big);
 }
 
 header .hello{
 	padding-right: 1rem;
 	color:var(--color-point);
+}
+
+header ul li a:hover{
+	text-decoration: underline;
+	color: initial !important;
 }
 
 /* 메인 */
@@ -214,6 +219,21 @@ main{
 	align-items: center;
 }
 
+.default-btn{
+	padding:1rem;
+	font-weight: 600;
+	color: var(--color-point);
+	border-radius: .5rem;
+	border:1px solid var(--color-point);
+	transition: all .2s ease-in-out;
+}
+
+.default-btn:hover{
+	color:var(--color-light) !important;
+	background-color: var(--color-point);
+	text-decoration: none;
+}
+
 footer{
 	margin-top: 8rem;
 	padding:3rem;
@@ -249,6 +269,7 @@ footer{
 
 .post-detail-wrapper .post-area{
 	padding:5rem 0;
+	position: relative;
 }
 
 .post-detail-wrapper .post-area .post-contents{
@@ -282,9 +303,10 @@ footer{
 	flex-grow: 1;
 }
 
-.post-detail-wrapper .post-area .nav-area a:hover p:first-child{
+.post-detail-wrapper .post-area .nav-area a:hover{
+	border-color: var(--color-point);
 	color: var(--color-point) !important;
-	transition: color .2s ease-in-out;
+	transition: all .2s ease-in-out;
 }
 
 .post-detail-wrapper .post-area .nav-area .next p:first-child{
@@ -299,4 +321,78 @@ footer{
 
 .post-detail-wrapper .comment-area{
 	padding-top: 5rem;
+}
+
+.post-detail-wrapper .comment-area ul{
+	display: flex;
+	flex-direction: column;
+}
+
+.post-detail-wrapper .comment-area li{
+	padding:2rem 1.5rem;
+	border-bottom: 1px solid var(--color-mid-grey);
+}
+
+.post-detail-wrapper .comment-area li:last-child{
+	border-bottom: none;
+}
+
+.post-detail-wrapper .comment-area .author-area{
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 2rem;
+	color: var(--color-dark-grey);
+}
+
+.post-detail-wrapper .comment-area .author-area b{
+	padding-right: 1rem;
+	font-size: var(--font-size-big);
+	font-weight: 600;
+	color: var(--color-dark);
+}
+
+.post-detail-wrapper .comment-area .author-control{
+	display: flex;
+	gap:1rem;
+}
+
+.post-detail-wrapper .comment-area .author-control button:hover{
+	text-decoration: underline;
+}
+
+.post-detail-wrapper .comment-area form{
+	display: flex;
+	flex-direction: column;
+	gap:1rem;
+	align-items: flex-end;
+}
+
+.post-detail-wrapper .comment-area form textarea{
+	flex-grow: 1;
+	width: 100%;
+	padding:2rem;
+	resize: none;
+	border-color: var(--color-dark-grey);
+	border-radius: .5rem;
+}
+
+.post-detail-wrapper .comment-area .comment-update-form{
+	display: none;
+}
+
+.post-detail-wrapper .comment-area .comment-create-form{
+	padding-top: 3rem;
+}
+
+.post-detail-wrapper .post-area aside{
+	position: sticky;
+	left:0;
+	top:0;
+	transform: translateX(-100%);
+	border: 1px solid var(--color-mid-grey);
+	display: inline-block;
+	padding:2rem;
+	border-radius: 10rem;
+	margin-left: -5rem;
 }

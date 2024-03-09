@@ -5,10 +5,10 @@
     <ul>
         {% if request.user.is_authenticated %}
         <li class="hello">
-            {{user.username}}님 안녕하세요!
+            <a href="{% url "profile" user.username %}">{{user.username}}님 안녕하세요!</a>
         </li>
         <li>
-            <a href="{% url "post_list" %}">리스트</a>
+            <a href="{% url "post_list" %}">검색</a>
         </li>
         <li>
             <a href="{% url "post_create" %}">글쓰기</a>
@@ -19,7 +19,7 @@
         <li>
             <form action="{% url "logout" %}" method="POST">
                 {% csrf_token %}
-                <button>로그아웃</button>
+                <button class="default-btn">로그아웃</button>
             </form>
         </li>
         {% else %}
@@ -27,10 +27,10 @@
             <a href="{% url "post_list" %}">리스트</a>
         </li>
         <li>
-            <a href="{% url "login" %}">로그인</a>
+            <a href="{% url "signup" %}">회원가입</a>
         </li>
         <li>
-            <a href="{% url "signup" %}">회원가입</a>
+            <a class="default-btn" href="{% url "login" %}">로그인</a>
         </li>
         {% endif %}
     </ul>
