@@ -33,24 +33,52 @@
         </div>
     </section>
     <section class="section-wrapper center-content">
-        <h2 class="title">최신글</h2>
+        <h2 class="section-title">최신글</h2>
         <ul class="post-list">
             {% for post in latest_list %}
             <li class="box3">
                 <a href="{% url "post_detail" post.pk %}">
-                    {{post.title}} / {{post.author}}
+                    {% if post.thumbnail_image %}
+                    <img src="{{post.thumbnail_image.url}}" alt="">
+                    {% endif %}
+                    <div class="content-box">
+                        <p class="title">{{post.title}}</p>
+                        <ul class="tag-list">
+                            {% for tag in post.tags.all %}
+                            <li>{{tag.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <p>by. {{post.author}}</p>
+                        <p>{{post.created_at|date:"Y-m-d"}}</p>
+                    </div>
                 </a>
             </li>
             {% endfor %}
         </ul>
     </section>
     <section class="section-wrapper center-content">
-        <h2 class="title">인기글</h2>
+        <h2 class="section-title">인기글</h2>
         <ul class="post-list">
             {% for post in popular_list %}
             <li class="box3">
                 <a href="{% url "post_detail" post.pk %}">
-                    {{post.title}} / {{post.author}}
+                    {% if post.thumbnail_image %}
+                    <img src="{{post.thumbnail_image.url}}" alt="">
+                    {% endif %}
+                    <div class="content-box">
+                        <p class="title">{{post.title}}</p>
+                        <ul class="tag-list">
+                            {% for tag in post.tags.all %}
+                            <li>{{tag.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <p>by. {{post.author}}</p>
+                        <p>{{post.created_at|date:"Y-m-d"}}</p>
+                    </div>
                 </a>
             </li>
             {% endfor %}

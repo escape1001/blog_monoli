@@ -5,3 +5,4 @@ venv
 *.pyc
 blog_monoli/__pycache__
 *.png
+*.webp

@@ -8,42 +8,65 @@
             <p>{{user.username}}</p>
         </div>
     </section>
-    <section>
-        <h3>내가 좋아한 글</h3>
+    <section class="section-wrapper">
+        <h3 class="section-title">내가 좋아한 글</h3>
         <ul class="post-list">
             {% for post in liked_posts %}
-            <li>
+            <li class="box4">
                 <a href="{% url "post_detail" post.pk %}">
-                    {{post.title}} / {{post.author}}<br/>
-                    <ul class="tag-list">
-                        {% for tag in post.tags.all %}
-                        <li>{{tag.name}}</li>
-                        {% endfor %}
-                    </ul>
+                    {% if post.thumbnail_image %}
+                    <img src="{{post.thumbnail_image.url}}" alt="">
+                    {% endif %}
+                    <div class="content-box">
+                        <p class="title">{{post.title}}</p>
+                        <ul class="tag-list">
+                            {% for tag in post.tags.all %}
+                            <li>{{tag.name}}</li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+                    <div class="info-box">
+                        <p>by. {{post.author}}</p>
+                        <p>{{post.created_at|date:"Y-m-d"}}</p>
+                    </div>
                 </a>
             </li>
             {% endfor %}
         </ul>
     </section>
-    <section>
-        <h3>내가 쓴 덧글</h3>
-        <ul class="post-list">
+    <section class="section-wrapper">
+        <h3 class="section-title">내가 쓴 덧글</h3>
+        <ul class="comment-list">
             {% for comment in comments %}
             <li>
                 <a href="{% url "post_detail" comment.post.pk %}">
-                    {{comment.contents}} / {{comment.author}}
+                    <p class="author">
+                        <span class="date">{{comment.created_at|date:"Y-m-d"}}</span>
+                    </p>
+                    <p class="comment">{{comment.contents}}</p>
+                    <p class="post">
+                        <span>{{comment.post.title}}</span>
+                        <span>by.{{comment.post.author}}</span>
+                    </p>
                 </a>
             </li>
             {% endfor %}
         </ul>
     </section>
-    <section>
-        <h3>내 글에 달린 덧글</h3>
-        <ul class="post-list">
+    <section class="section-wrapper">
+        <h3 class="section-title">내 글에 달린 덧글</h3>
+        <ul class="comment-list">
             {% for comment in commented_myposts %}
             <li>
                 <a href="{% url "post_detail" comment.post.pk %}">
-                    {{comment.contents}} / {{comment.author}}
+                    <p class="author">
+                        <span>by.{{comment.author}}</span>
+                        <span class="date">{{comment.created_at|date:"Y-m-d"}}</span>
+                    </p>
+                    <p class="comment">{{comment.contents}}</p>
+                    <p class="post">
+                        <span>{{comment.post.title}}</span>
+                    </p>
                 </a>
             </li>
             {% endfor %}
