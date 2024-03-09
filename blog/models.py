@@ -51,3 +51,13 @@ class Tag(models.Model):
     
     def __str__(self):
         return self.name
+    
+
+class Promotion(models.Model):
+    promo_code = models.CharField(max_length=30)
+    q = models.CharField(max_length=50, blank=True)
+    tags = models.ManyToManyField('Tag', blank=True)
+    is_show = models.BooleanField(default=False)
+
+    def __str__(self):
+        return self.promo_code
