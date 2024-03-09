@@ -1,11 +1,19 @@
 {% extends "base/base.html" %}
+{% load blog_tags %}
 {% block content %}
 <main>
     <section>
         <h2>인기 프로모션</h2>
-        <div>
-            promotion 태그 만들어서 캐러셀 반복문~
-        </div>
+        <ul class="post-list">
+            {% for promotion in promotion_list %}
+            <li>
+                {% trans_promo_query promotion as promo_query %}
+                <a href="{% url 'post_list' %}{{promo_query}}">
+                    {{promo_query}}
+                </a>
+            </li>
+            {% endfor %}
+        </ul>
     </section>
     <section class="center-content">
         <h2>최신글</h2>

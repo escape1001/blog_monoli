@@ -1,7 +1,7 @@
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, View
 )
-from .models import Post, Comment, Tag, Like
+from .models import Post, Comment, Tag, Like, Promotion
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -20,11 +20,14 @@ class Main(ListView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         
+        # 프로모션 리스트화
+        promotion_list = Promotion.objects.filter(is_show=True)
         # 최신 글 상위 6개
         latest_list = Post.objects.all().order_by('-created_at')[:6]
         # 인기글 상위 6개 (여기서는 댓글 개수로 인기를 판단하도록 예시로 설정)
         popular_list = Post.objects.annotate(num_comments=Count('likes')).order_by('-num_comments')[:6]
 
+        context['promotion_list'] = promotion_list
         context['latest_list'] = latest_list
         context['popular_list'] = popular_list
         
