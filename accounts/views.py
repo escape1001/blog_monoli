@@ -2,20 +2,28 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render
+from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from blog.models import Post, Comment, Like
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.db.models import Q
+from django.urls import reverse
+from django.contrib.auth import login as auth_login
 
 
 
-signup = CreateView.as_view(
-    form_class = UserCreationForm,
-    template_name = "accounts/accounts_form.html",
-    success_url = settings.LOGIN_URL
-)
+class Signup(CreateView):
+    form_class = UserCreationForm
+    template_name = "accounts/accounts_form.html"
+
+    def form_valid(self, form): # 회원가입 시 자동 로그인하고 프로필페이지로 리디렉
+        user = form.save()
+        auth_login(self.request, user)
+
+        return redirect(f"/profile/{user.username}")
+
+signup = Signup.as_view()
 
 login = LoginView.as_view(
     template_name = "accounts/accounts_form.html",
