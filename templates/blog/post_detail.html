@@ -1,11 +1,22 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block content %}
 <main class="post-detail-wrapper">
     <section class="title-area">
+        {% if post.thumbnail_image %}
+        <img class="thumbnail-image" src="{{post.thumbnail_image.url}}" alt="">
+        {% endif %}
         <h2 class="center-content">{{post.title}}</h2>
         <div class="info-area center-content">
             <p>
-                by.<a href="{% url "profile" post.author %}">{{post.author}}</a>
+                <a href="{% url "profile" post.author %}">
+                    {% if author_info.profile_image %}
+                    <img class="profile-image" src="{{author_info.profile_image.url}}">
+                    {% else %}
+                    <img class="profile-image" src="{% static "assets/default_profile.png" %}">
+                    {% endif %}
+                    by.{{post.author}}
+                </a>
                  | {{post.created_at|date:"Y-m-d"}}
                  | {{post.view_count}}
             </p>

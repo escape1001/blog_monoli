@@ -2,6 +2,7 @@ from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, View
 )
 from .models import Post, Comment, Tag, Like, Promotion
+from accounts.models import Profile
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
@@ -73,16 +74,22 @@ class PostDetail(DetailView):
         return super().get_object(queryset)
     
     def get_context_data(self, **kwargs):
-        author = self.request.user
+        user = self.request.user
         context = super().get_context_data(**kwargs)
         context['form'] = CommentForm()
         
         current_post = self.object
         prev_post = Post.objects.filter(pk__lt=current_post.pk).order_by('-pk').first()
         next_post = Post.objects.filter(pk__gt=current_post.pk).order_by('-pk').first()
-
+        
+        try:
+            author_info = Profile.objects.get(user=current_post.author)
+            context['author_info'] = author_info
+        except Profile.DoesNotExist:
+            pass
+        
         try :
-            liked = bool(Like.objects.filter(post=current_post, author=author))
+            liked = bool(Like.objects.filter(post=current_post, author=user))
             context['liked'] = liked
         except:
             pass
