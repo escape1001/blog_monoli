@@ -4,7 +4,8 @@
     <h2>post_form</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
-        {{form.as_p}}
+        {{ form.media }}
+        {{ form.as_p }}
         <button>submit</button>
     </form>
 </main>

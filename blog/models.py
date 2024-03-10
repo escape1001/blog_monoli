@@ -1,10 +1,11 @@
 from django.db import models
 from django.contrib.auth.models import User
+from tinymce import models as tinymce_models
 
 
 class Post(models.Model):
     title=models.CharField(max_length=50)
-    contents=models.TextField()
+    contents=tinymce_models.HTMLField()
     thumbnail_image = models.ImageField(
         upload_to="post/thumbnails/%Y/%m/%d/", blank=True
     )

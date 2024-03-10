@@ -7,3 +7,7 @@ blog_monoli/__pycache__
 *.png
 *.webp
 static/assets/banner/.DS_Store
+*.jpg
+static/assets/.DS_Store
+static/assets/.DS_Store
+*.pyc

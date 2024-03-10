@@ -34,7 +34,7 @@
         </aside>
         <article>
             <h3 class="ir-hidden">내용</h3>
-            <div class="post-contents">{{post.contents}}</div>
+            <div class="post-contents">{{post.contents|safe}}</div>
             {% if post.tags.all %}
             <div class="tag-area">
                 <p>태그</p>

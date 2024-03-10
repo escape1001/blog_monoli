@@ -28,6 +28,7 @@ urlpatterns = [
     path('post/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
     path('profile/<str:username>/', accounts_views.profile, name="profile"),
+    path('tinymce/', include('tinymce.urls')),
 ]
 
 urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
