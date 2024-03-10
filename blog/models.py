@@ -6,7 +6,7 @@ class Post(models.Model):
     title=models.CharField(max_length=50)
     contents=models.TextField()
     thumbnail_image = models.ImageField(
-        upload_to="tube/images/%Y/%m/%d/", blank=True
+        upload_to="post/thumbnails/%Y/%m/%d/", blank=True
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)

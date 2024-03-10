@@ -5,6 +5,7 @@ from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect
 from django.views.generic import CreateView
 from blog.models import Post, Comment, Like
+from accounts.models import Profile
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.db.models import Q
@@ -48,6 +49,7 @@ def profile(request, username):
 
 @login_required
 def mypage(request):
+    profile = Profile.objects.get(user=request.user)
     comments = Comment.objects.filter(author=request.user)
     liked = Like.objects.filter(author=request.user).values_list('post', flat=True)
     liked_posts = Post.objects.filter(pk__in=liked)
@@ -55,6 +57,7 @@ def mypage(request):
     commented_myposts = Comment.objects.filter(~Q(author=request.user), post__in=commented_my)
 
     context = {
+        "profile" : profile,
         "comments" : comments,
         "liked_posts" : liked_posts,
         "commented_myposts" : commented_myposts,
