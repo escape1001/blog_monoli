@@ -14,6 +14,7 @@ class Post(models.Model):
         User, on_delete=models.CASCADE
     )
     tags = models.ManyToManyField('Tag', blank=True)
+    view_count = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return self.title

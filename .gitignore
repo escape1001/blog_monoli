@@ -6,3 +6,4 @@ venv
 blog_monoli/__pycache__
 *.png
 *.webp
+static/assets/banner/.DS_Store

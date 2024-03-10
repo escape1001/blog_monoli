@@ -65,6 +65,13 @@ class PostList(ListView):
 class PostDetail(DetailView):
     model = Post
 
+    def get_object(self, queryset=None):
+        pk = self.kwargs.get('pk')
+        post = Post.objects.get(pk=pk)
+        post.view_count += 1
+        post.save()
+        return super().get_object(queryset)
+    
     def get_context_data(self, **kwargs):
         author = self.request.user
         context = super().get_context_data(**kwargs)

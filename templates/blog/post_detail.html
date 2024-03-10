@@ -7,6 +7,7 @@
             <p>
                 by.<a href="{% url "profile" post.author %}">{{post.author}}</a>
                  | {{post.created_at|date:"Y-m-d"}}
+                 | {{post.view_count}}
             </p>
             {% if user == post.author %}
             <div class="btn-area">
