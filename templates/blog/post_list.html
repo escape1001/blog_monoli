@@ -54,6 +54,11 @@
                 </a>
             </li>
             {% endfor %}
+            {% if not post_list %}
+            <li class="empty">
+                조건에 맞는 포스트가 없습니다.
+            </li>
+            {% endif %}
         </ul>
     </section>
 </main>
