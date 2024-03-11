@@ -526,14 +526,17 @@ footer{
 }
 
 .post-detail-wrapper .search-area .tag-list li{
-	padding:1rem 1.5rem;
+	padding:0;
 	cursor: pointer;
-	font-size: var(--font-size-bigger);
+	font-size: var(--font-size-big);
 	border:2px solid var(--color-light-grey);
 	opacity: 0.8;
 	transition: all .2s ease-in-out;
 }
 
+.post-detail-wrapper .search-area .tag-list li label{
+	padding:1rem 1.5rem;
+}
 .post-detail-wrapper .search-area .tag-list li input{
 	display: none;
 }
@@ -550,6 +553,10 @@ footer{
 }
 
 /* post-form-wrapper */
+.post-form-wrapper{
+	padding-top: 5rem;
+}
+
 .post-form-wrapper p{
 	padding-bottom: 3rem;
 }

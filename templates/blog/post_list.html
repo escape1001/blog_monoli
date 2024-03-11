@@ -57,4 +57,14 @@
         </ul>
     </section>
 </main>
+<script>
+    const form = document.querySelector(".search-area form");
+    const tag_btn_list = document.querySelectorAll(".search-area .tag-list input");
+
+    tag_btn_list.forEach(tag_btn => {
+        tag_btn.addEventListener('change', ()=>{
+            form.submit();
+        });
+    });
+</script>
 {% endblock %}

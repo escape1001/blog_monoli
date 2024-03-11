@@ -6,7 +6,7 @@ from accounts.models import Profile
 from django.urls import reverse_lazy, reverse
 from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import Count
+from django.db.models import F, Sum, Count
 from .forms import CommentForm
 from django.http import HttpResponseRedirect
 from django.urls import reverse
@@ -25,8 +25,10 @@ class Main(ListView):
         promotion_list = Promotion.objects.filter(is_show=True)
         # 최신 글 상위 6개
         latest_list = Post.objects.all().order_by('-created_at')[:6]
-        # 인기글 상위 6개 (여기서는 댓글 개수로 인기를 판단하도록 예시로 설정)
-        popular_list = Post.objects.annotate(num_comments=Count('likes')).order_by('-num_comments')[:6]
+        # 인기글 상위 6개
+        popular_list = Post.objects.annotate(
+            total_popularity=F('view_count') + Count('comments') + Count('likes')
+        ).order_by('-total_popularity')[:6]
 
         context['promotion_list'] = promotion_list
         context['latest_list'] = latest_list
@@ -42,17 +44,19 @@ class PostList(ListView):
         queryset = super().get_queryset()
 
         q = self.request.GET.get('q', '')
-        tag = self.request.GET.get('tag', '')
+        tags = self.request.GET.getlist('tag')
+
 
         if q :
             queryset = queryset.filter(
                 Q(title__icontains=q) | Q(contents__icontains=q)
             ).distinct()
 
-        if tag :
-            queryset = queryset.filter(
-                tags__name__iexact=tag
-            )
+        for tag in tags:
+            if tag:
+                queryset = queryset.filter(
+                    tags__name__iexact=tag
+                )
 
         return queryset
     
