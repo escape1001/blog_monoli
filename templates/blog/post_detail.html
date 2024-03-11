@@ -22,7 +22,7 @@
             </p>
             {% if user == post.author %}
             <div class="btn-area">
-                <form action="{% url "post_update" post.pk %}" method="POST">
+                <form action="{% url "post_update" post.pk %}" method="GET">
                     {% csrf_token %}
                     <button>수정하기</button>
                 </form>
