@@ -296,7 +296,8 @@ main{
 
 footer{
 	margin-top: 15rem;
-	padding:3rem;
+	padding:8rem 0 5rem;
+	text-align: center;
 	background-color: var(--color-light-grey);
 }
 
