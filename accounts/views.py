@@ -20,6 +20,9 @@ class Signup(CreateView):
 
     def form_valid(self, form): # 회원가입 시 자동 로그인하고 프로필페이지로 리디렉
         user = form.save()
+        profile = Profile.objects.create(user=user, nickname=user.username)
+        profile.save()
+        
         auth_login(self.request, user)
 
         return redirect("/accounts/mypage")
