@@ -28,7 +28,7 @@
                 </form>
                 <form action="{% url "post_delete" post.pk %}" method="POST">
                     {% csrf_token %}
-                    <button>삭제하기</button>
+                    <button type="button" class="delete-btn">삭제하기</button>
                 </form>
             </div>
             {% endif %}
@@ -83,17 +83,17 @@
                         </p>
                         {% if user == comment.author %}
                         <div class="author-control">
-                            <button>수정하기</button>
+                            <button class="mod-btn">수정하기</button>
                             <form action="{% url "comment_delete" comment.pk %}" method="POST">
                                 {% csrf_token %}
-                                <button>삭제하기</button>
+                                <button type="button" class="delete-btn">삭제하기</button>
                             </form>
                         </div>
                         {% endif %}
                     </div>
-                    {{comment.contents}}
+                    <p class="contents">{{comment.contents}}</p>
                     {% if user == comment.author %}
-                    <form class="comment-update-form" action="{% url "comment_update" comment.pk %}" method="POST">
+                    <form class="comment-update-form ir-hidden" action="{% url "comment_update" comment.pk %}" method="POST">
                         {% csrf_token %}
                         {{form.contents}}
                         <button class="default-btn">수정 완료</button>
@@ -110,7 +110,31 @@
                 </div>
             </form>
         </article>
-        
     </section>
 </main>
+<script>
+    const comment_mod_btns = document.querySelectorAll(".comment-area li .mod-btn");
+    const delete_btns = document.querySelectorAll(".delete-btn");
+    
+    comment_mod_btns.forEach(mod_btn => {
+        mod_btn.addEventListener('click', ()=>{
+            const form = mod_btn.parentElement.parentElement.parentElement.querySelector('.comment-update-form');
+            const value = mod_btn.parentElement.parentElement.parentElement.querySelector('.contents').innerText;
+            const input = form.querySelector('textarea');
+            mod_btn.innerText = mod_btn.innerText == "수정하기" ? "수정취소" : "수정하기"
+            input.value = input.value ? '' : value;
+            form.classList.toggle('ir-hidden')
+        });
+    });
+    
+    delete_btns.forEach(delete_btn => {
+        delete_btn.addEventListener('click', ()=>{
+            const form = delete_btn.parentElement;
+            
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                form.submit();
+            }
+        });
+    });
+</script>
 {% endblock %}

@@ -468,11 +468,7 @@ footer{
 }
 
 .post-detail-wrapper .comment-area .comment-update-form{
-	display: none;
-}
-
-.post-detail-wrapper .comment-area .comment-create-form{
-	padding-top: 3rem;
+	padding-top: 2rem;
 }
 
 .post-detail-wrapper .post-area aside{
