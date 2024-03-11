@@ -87,9 +87,33 @@ header ul li a:hover{
 main{
 	min-height: 100vh;
 }
+
+.promo-banner a{
+	display: block;
+	position: relative;
+}
+
 .promo-banner img{
 	aspect-ratio: 10/3;
 	object-fit: cover;
+	opacity: .7;
+}
+
+.promo-banner .text{
+	position: absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.promo-banner .text pre{
+	font-size: var(--font-size-huge);
+	font-weight: 600;
+	line-height: 1.5;
+	overflow: visible;
 }
 
 .section-wrapper{

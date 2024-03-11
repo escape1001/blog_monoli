@@ -18,6 +18,9 @@
                     {% trans_promo_query promotion as promo_query %}
                     <a class="promo-banner" href="{% url 'post_list' %}{{promo_query}}">
                         <img src="{% static "assets/banner/" %}{{promotion.promo_code}}.png" class="d-block w-100" alt="{{promotion_promo_code}}">
+                        <div class="text">
+                            <pre class="center-content">{{promotion.title}}</pre>
+                        </div>
                     </a>
                 </div>
                 {% endfor %}

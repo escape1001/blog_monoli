@@ -57,6 +57,7 @@ class Tag(models.Model):
 
 class Promotion(models.Model):
     promo_code = models.CharField(max_length=30)
+    title = models.TextField()
     q = models.CharField(max_length=50, blank=True)
     tags = models.ManyToManyField('Tag', blank=True)
     is_show = models.BooleanField(default=False)
