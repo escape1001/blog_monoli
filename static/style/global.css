@@ -183,6 +183,19 @@ main{
 	align-items: center;
 }
 
+.post-list .empty{
+	width: 100%;
+	padding:4rem;
+	font-size: var(--font-size-big);
+	text-align: center;
+	border:1px solid var(--color-mid-grey);
+	border-radius: .5rem;
+}
+
+.post-list .empty:hover{
+	box-shadow: none;
+}
+
 .tag-list{
 	display: flex;
 	gap:1rem;
@@ -244,6 +257,16 @@ main{
 	align-items: center;
 }
 
+.comment-list .empty{
+	padding:4rem;
+	text-align: center;
+	font-size: var(--font-size-big);
+}
+
+.comment-list .empty:hover{
+	box-shadow: none;
+}
+
 .default-btn{
 	padding:1rem;
 	font-weight: 600;
@@ -259,8 +282,20 @@ main{
 	text-decoration: none;
 }
 
+.default-btn.reverse{
+	background-color: var(--color-point);
+	color:var(--color-light) !important;
+	border-radius: .5rem;
+	transition: all .2s ease-in-out;
+}
+
+.default-btn.reverse:hover{
+	background:none;
+	color:var(--color-point) !important;
+}
+
 footer{
-	margin-top: 8rem;
+	margin-top: 15rem;
 	padding:3rem;
 	background-color: var(--color-light-grey);
 }
@@ -511,4 +546,191 @@ footer{
 
 .post-detail-wrapper .result-area{
 	padding-top: 5rem;
+}
+
+/* post-form-wrapper */
+.post-form-wrapper p{
+	padding-bottom: 3rem;
+}
+
+.post-form-wrapper label{
+	padding-right: 1rem;
+	padding-bottom: 1rem;
+	font-size: var(--font-size-big);
+}
+
+.post-form-wrapper input,
+.post-form-wrapper select{
+	padding: 1rem;
+	width: 100%;
+}
+
+.post-form-wrapper p:has(input[name="thumbnail_image"]),
+.post-form-wrapper p:has(select[name="tags"]){
+	width: 50%;
+	float: left;
+}
+
+.post-form-wrapper .btn-area{
+	text-align: right;
+	clear: both;
+}
+
+
+/* accounts-form-wrapper */
+.accounts-form-wrapper{
+	min-height: calc(100vh - 17rem);
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap:2rem;
+}
+
+.accounts-form-wrapper form{
+	min-width: 50%;
+}
+
+.accounts-form-wrapper p{
+	padding-bottom: 5rem;
+	display: flex;
+	gap:1rem;
+	flex-wrap: wrap;
+	justify-content: flex-start;
+	align-items: center;
+}
+
+.accounts-form-wrapper p:has(input[name="password1"]){
+	padding-bottom: 0;
+}
+
+.accounts-form-wrapper label{
+	font-size: var(--font-size-big);
+	font-weight: 600;
+}
+
+.accounts-form-wrapper input{
+	padding:1rem;
+	flex-grow: 1;
+}
+
+.accounts-form-wrapper span{
+	width: 100%;
+	flex-grow: 1;
+	padding: 1rem;
+}
+
+.accounts-form-wrapper ul{
+	list-style-position: outside;
+	padding-left: 2rem;
+}
+
+.accounts-form-wrapper li{
+	list-style: circle;
+	line-height: 1.5;
+}
+
+.accounts-form-wrapper .btn-area{
+	justify-content: flex-end;
+}
+
+.accounts-form-wrapper button{
+	padding:1.5rem;
+	font-size: var(--font-size-big);
+	flex-grow: 1;
+}
+
+/* mypage-wrapper */
+.mypage-wrapper .profile-area{
+	height: 40rem;
+	background-color: var(--color-point);
+}
+
+.mypage-wrapper .profile-area>div{
+	padding:5rem;
+	height: 35rem;
+	display: flex;
+	align-items: center;
+	background-color: var(--color-light);
+	transform: translateY(15rem);
+	box-shadow: 0 0 1rem rgba(0,0,0,0.2);
+	gap:4rem;
+}
+
+.mypage-wrapper .profile-area .profile-image{
+	width: 15rem;
+	height: 15rem;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.mypage-wrapper .profile-area .text-area{
+	display: flex;
+	flex-direction: column;
+	font-size: var(--font-size-bigger);
+	gap:2rem;
+}
+
+.mypage-wrapper .profile-area .text-area b{
+	font-weight: 800;
+	padding-right: 2rem;
+}
+
+.mypage-wrapper .profile-area+section{
+	padding-top: 25rem;
+}
+
+/* userhome-wrapper */
+.userhome-wrapper{
+	display: flex;
+	flex-direction: column;
+}
+
+.userhome-wrapper .section-title{
+	padding: 3rem 0;
+}
+.userhome-wrapper section{
+	padding:5rem 2rem;
+	background-color: var(--color-white);
+	box-shadow: 0 0 1rem rgba(0,0,0,0.1);
+	border-radius: .5rem;
+}
+
+.userhome-wrapper .flex-area{
+	padding-top: 3rem;
+	display: flex;
+	gap:2rem;
+	align-items: stretch;
+	height: 100%;
+	flex-grow: 1;
+}
+
+.userhome-wrapper .profile-area{
+	flex-grow: 0;
+	flex-shrink: 0;
+	align-self: flex-start;
+	width: 30%;
+	min-width: 30rem;
+	text-align: center;
+}
+
+.userhome-wrapper .profile-area .profile-image{
+	width: 10rem;
+	height: 10rem;
+	border-radius: 50%;
+	object-fit: cover;
+}
+
+.userhome-wrapper .profile-area .text-area{
+	padding-top: 3rem;
+	font-size: var(--font-size-big);
+	font-weight: 600;
+}
+
+.userhome-wrapper .post-area{
+	flex-grow: 1;
+}
+
+.userhome-wrapper .post-area .empty{
+	border:none;
 }

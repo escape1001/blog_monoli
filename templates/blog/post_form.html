@@ -1,12 +1,14 @@
 {% extends "base/base.html" %}
 {% block content %}
-<main class="center-content">
-    <h2>post_form</h2>
+<main class="post-form-wrapper center-content">
+    <h2 class="ir-hidden">글 작성/수정</h2>
     <form method="POST" enctype="multipart/form-data">
         {% csrf_token %}
         {{ form.media }}
         {{ form.as_p }}
-        <button>submit</button>
+        <p class="btn-area">
+            <button class="default-btn">글 작성 완료</button>
+        </p>
     </form>
 </main>
 {% endblock %}

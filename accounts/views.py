@@ -22,7 +22,7 @@ class Signup(CreateView):
         user = form.save()
         auth_login(self.request, user)
 
-        return redirect(f"/profile/{user.username}")
+        return redirect("/accounts/mypage")
 
 signup = Signup.as_view()
 
@@ -37,10 +37,12 @@ logout = LogoutView.as_view(
 
 def userhome(request, username):
     user_obj = User.objects.get(username=username)
+    profile = Profile.objects.get(user=user_obj)
     posts = Post.objects.filter(author=user_obj)
 
     context = {
         "posts" : posts,
+        "profile" : profile,
         "author" : user_obj,
     }
 

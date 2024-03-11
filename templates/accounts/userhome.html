@@ -1,37 +1,61 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block content %}
-<main class="center-content">
-    <h2 class="section-title">{{author.username}}의 블로그</h2>
+<main class="userhome-wrapper center-content">
+    <h2 class="section-title">{{profile.nickname}}의 블로그</h2>
     {% if request.user == author %}
-    <section>
+    <section class="recommend-area">
         <h3 class="ir-hidden">글감 추천</h3>
+        <div>글감 이런건 어떠세요?</div>
     </section>
     {% endif %}
-    <section>
-        <h3 class="ir-hidden">{{author.username}}의 포스트</h3>
-        <ul class="post-list">
-            {% for post in posts %}
-            <li class="box3">
-                <a href="{% url "post_detail" post.pk %}">
-                    {% if post.thumbnail_image %}
-                    <img src="{{post.thumbnail_image.url}}" alt="">
-                    {% endif %}
-                    <div class="content-box">
-                        <p class="title">{{post.title}}</p>
-                        <ul class="tag-list">
-                            {% for tag in post.tags.all %}
-                            <li>{{tag.name}}</li>
-                            {% endfor %}
-                        </ul>
-                    </div>
-                    <div class="info-box">
-                        <p>by. {{post.author}}</p>
-                        <p>{{post.created_at|date:"Y-m-d"}}</p>
-                    </div>
-                </a>
-            </li>
-            {% endfor %}
-        </ul>
-    </section>
+    <div class="flex-area">
+        <section class="profile-area">
+            <h3 class="ir-hidden">유저 프로필</h3>
+            <div class="">
+                {% if author_info.profile_image %}
+                <img class="profile-image" src="{{profile.profile_image.url}}" alt="{{profile.nickname}}의 프로필 이미지">
+                {% else %}
+                <img class="profile-image" src="{% static "assets/default_profile.png" %}">
+                {% endif %}
+                <div class="text-area">
+                    <p>
+                        {{profile.nickname}}
+                    </p>
+                </div>
+            </div>
+        </section>
+        <section class="post-area">
+            <h3 class="ir-hidden">{{profile.nickname}}의 포스트</h3>
+            <ul class="post-list">
+                {% for post in posts %}
+                <li class="box3">
+                    <a href="{% url "post_detail" post.pk %}">
+                        {% if post.thumbnail_image %}
+                        <img src="{{post.thumbnail_image.url}}" alt="">
+                        {% endif %}
+                        <div class="content-box">
+                            <p class="title">{{post.title}}</p>
+                            <ul class="tag-list">
+                                {% for tag in post.tags.all %}
+                                <li>{{tag.name}}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="info-box">
+                            <p>by. {{post.author}}</p>
+                            <p>{{post.created_at|date:"Y-m-d"}}</p>
+                        </div>
+                    </a>
+                </li>
+                {% endfor %}
+                {% if not posts %}
+                <li class="empty">
+                    아직 작성한 글이 없습니다.
+                </li>
+                {% endif %}
+            </ul>
+        </section>
+    </div>
 </main>
 {% endblock %}

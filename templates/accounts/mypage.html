@@ -1,15 +1,29 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% block content %}
-<main class="center-content">
-    <h2>Mypage</h2>
-    <section>
+<main class="mypage-wrapper">
+    <h2 class="ir-hidden">Mypage</h2>
+    <section class="profile-area">
         <h3 class="ir-hidden">가입정보</h3>
-        <div>
-            <img src="{{profile.profile_image.url}}" alt="{{profile.nickname}}의 프로필 이미지">
-            <p>{{profile.nickname}}</p>
+        <div class="center-content">
+            {% if author_info.profile_image %}
+            <img class="profile-image" src="{{profile.profile_image.url}}" alt="{{profile.nickname}}의 프로필 이미지">
+            {% else %}
+            <img class="profile-image" src="{% static "assets/default_profile.png" %}">
+            {% endif %}
+            <div class="text-area">
+                <p>
+                    <b>ID</b>
+                    <span>{{user.username}}</span>
+                </p>
+                <p>
+                    <b>닉네임</b>
+                    <span>{{profile.nickname}}</span>
+                </p>
+            </div>
         </div>
     </section>
-    <section class="section-wrapper">
+    <section class="section-wrapper center-content">
         <h3 class="section-title">내가 좋아한 글</h3>
         <ul class="post-list">
             {% for post in liked_posts %}
@@ -33,9 +47,14 @@
                 </a>
             </li>
             {% endfor %}
+            {% if not liked_posts %}
+            <li class="empty">
+                아직 좋아요를 누른 글이 없습니다.
+            </li>
+            {% endif %}
         </ul>
     </section>
-    <section class="section-wrapper">
+    <section class="section-wrapper center-content">
         <h3 class="section-title">내가 쓴 덧글</h3>
         <ul class="comment-list">
             {% for comment in comments %}
@@ -52,9 +71,14 @@
                 </a>
             </li>
             {% endfor %}
+            {% if not comments %}
+            <li class="empty">
+                아직 작성된 덧글이 없습니다.
+            </li>
+            {% endif %}
         </ul>
     </section>
-    <section class="section-wrapper">
+    <section class="section-wrapper center-content">
         <h3 class="section-title">내 글에 달린 덧글</h3>
         <ul class="comment-list">
             {% for comment in commented_myposts %}
@@ -71,6 +95,11 @@
                 </a>
             </li>
             {% endfor %}
+            {% if not commented_myposts %}
+            <li class="empty">
+                아직 작성된 덧글이 없습니다.
+            </li>
+            {% endif %}
         </ul>
     </section>
 </main>
