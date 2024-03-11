@@ -11,3 +11,4 @@ static/assets/banner/.DS_Store
 static/assets/.DS_Store
 static/assets/.DS_Store
 *.pyc
+blog_monoli/__pycache__/settings.cpython-311.pyc

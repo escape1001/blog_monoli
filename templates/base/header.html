@@ -5,7 +5,7 @@
     <ul>
         {% if request.user.is_authenticated %}
         <li class="hello">
-            <a href="{% url "userhome" user.username %}">{{user.username}}님 안녕하세요!</a>
+            <a href="{% url "userhome" user.username %}">{{profile.nickname}}님 안녕하세요!</a>
         </li>
         <li>
             <a href="{% url "post_list" %}">검색</a>
