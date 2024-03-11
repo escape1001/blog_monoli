@@ -35,7 +35,7 @@ logout = LogoutView.as_view(
 )
 
 
-def profile(request, username):
+def userhome(request, username):
     user_obj = User.objects.get(username=username)
     posts = Post.objects.filter(author=user_obj)
 
@@ -44,7 +44,7 @@ def profile(request, username):
         "author" : user_obj,
     }
 
-    return render(request, 'accounts/profile.html', context)
+    return render(request, 'accounts/userhome.html', context)
 
 
 @login_required

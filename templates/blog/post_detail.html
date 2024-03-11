@@ -9,7 +9,7 @@
         <h2 class="center-content">{{post.title}}</h2>
         <div class="info-area center-content">
             <p>
-                <a href="{% url "profile" post.author %}">
+                <a href="{% url "userhome" post.author %}">
                     {% if author_info.profile_image %}
                     <img class="profile-image" src="{{author_info.profile_image.url}}">
                     {% else %}

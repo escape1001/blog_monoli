@@ -11,7 +11,7 @@
 /accounts/login
 /accounts/logout                # 로그인한 사용자만 접근 가능
 /accounts/mypage                # 로그인한 사용자만 접근 가능
-/profile/<str:username>         [accounts:profile] # 유저 공개프로필
+/<str:username>                 [accounts:userhome] # 유저 홈
 """
 from django.contrib import admin
 from django.urls import path, include
@@ -27,7 +27,7 @@ urlpatterns = [
     path('posts/', blog_views.post_list, name="post_list"),
     path('post/', include('blog.urls')),
     path('accounts/', include('accounts.urls')),
-    path('profile/<str:username>/', accounts_views.profile, name="profile"),
+    path('<str:username>/', accounts_views.userhome, name="userhome"),
     path('tinymce/', include('tinymce.urls')),
 ]
 
