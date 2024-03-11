@@ -1,26 +1,32 @@
 {% extends "base/base.html" %}
 {% load blog_tags %}
 {% block content %}
-<main class="center-content">
-    <form>
-        <input name="q" placeholder="검색어를 입력하세요" value="{{ request.GET.q }}"/>
-        <ul>
-            {% for tag in tags %}
-            <li>
-                <label for="{{tag.name}}">{{tag.name}}</label>
-                <input
-                    name="tag"
-                    type="checkbox"
-                    value="{{tag.name}}"
-                    {% parse_tag_list request as tag_list %}
-                    {% if tag.name in tag_list %}checked{% endif %}
-                >
-            </li>
-            {% endfor %}
-        </ul>
-        <button>검색</button>
-    </form>
-    <section>
+<main class="post-detail-wrapper">
+    <section class="search-area">
+        <h2 class="ir-hidden">포스트 검색</h2>
+        <form class="center-content">
+            <p>
+                <input name="q" placeholder="검색어를 입력하세요" value="{{ request.GET.q }}"/>
+                <button class="default-btn">검색</button>
+            </p>
+            <ul class="tag-list">
+                {% for tag in tags %}
+                <li>
+                    <label for="{{tag.name}}">{{tag.name}}</label>
+                    <input
+                        name="tag"
+                        id="{{tag.name}}"
+                        type="checkbox"
+                        value="{{tag.name}}"
+                        {% parse_tag_list request as tag_list %}
+                        {% if tag.name in tag_list %}checked{% endif %}
+                    >
+                </li>
+                {% endfor %}
+            </ul>
+        </form>
+    </section>
+    <section class="result-area center-content">
         {% if request.GET %}
         <h2 class="section-title">검색 결과</h2>
         {% else %}
