@@ -27,7 +27,7 @@ class Main(ListView):
         latest_list = Post.objects.all().order_by('-created_at')[:6]
         # 인기글 상위 6개
         popular_list = Post.objects.annotate(
-            total_popularity=F('view_count') + Count('comments') + Count('likes')
+            total_popularity=F('view_count') + Count('comments')*2.5 + Count('likes')*2
         ).order_by('-total_popularity')[:6]
 
         context['promotion_list'] = promotion_list
