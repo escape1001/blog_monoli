@@ -48,10 +48,6 @@ body{
 	background-color: var(--color-light);
 }
 
-.liked{
-	border:1px solid red;
-}
-
 
 /* 헤더 */
 header{
@@ -330,7 +326,7 @@ footer{
 /* post-detail-wrapper */
 .post-detail-wrapper .title-area{
 	padding:20rem 0 5rem;
-	background-color: var(--color-point);
+	background-image: linear-gradient(to top, rgba(200,200,200, 1) 0%, rgba(200,200,200, 0.2) 100%);
 	position: relative;
 }
 
@@ -341,7 +337,7 @@ footer{
 	position: absolute;
 	left: 0;
 	top:0;
-	opacity: .7;
+	z-index: -1;
 }
 
 .post-detail-wrapper .title-area h2{
@@ -373,9 +369,27 @@ footer{
 	object-fit: cover;
 }
 
-.post-detail-wrapper .title-area .btn-area{
+.post-detail-wrapper .title-area .right-area{
 	display: flex;
+	align-items: center;
 	gap:2rem;
+}
+
+.post-detail-wrapper .title-area .right-area ul{
+	display: flex;
+	align-items: center;
+	gap:1rem;
+}
+
+.post-detail-wrapper .title-area .right-area li{
+	display: flex;
+	gap:.5rem;
+	align-items: center;
+}
+.post-detail-wrapper .title-area .right-area li img{
+	width: 3rem;
+	height: 3rem;
+	object-fit: contain;
 }
 
 .post-detail-wrapper .title-area .info-area a:hover,
@@ -507,6 +521,16 @@ footer{
 	padding:2rem;
 	border-radius: 10rem;
 	margin-left: -5rem;
+	display: inline-flex;
+	flex-direction: column;
+	gap: 2rem;
+	align-items: center;
+}
+
+.post-detail-wrapper .post-area aside img{
+	width: 3rem;
+	height: 3rem;
+	object-fit: contain;
 }
 
 

@@ -20,8 +20,22 @@
                  | {{post.created_at|date:"Y-m-d"}}
                  | {{post.view_count}}
             </p>
-            {% if user == post.author %}
-            <div class="btn-area">
+            <div class="right-area">
+                <ul>
+                    <li>
+                        <img src="{% static "assets/icon_view.svg" %}" alt="view">
+                        {{post.view_count}}
+                    </li>
+                    <li>
+                        <img src="{% static "assets/icon_comment.svg" %}" alt="comment">
+                        {{post.comments.count}}
+                    </li>
+                    <li>
+                        <img src="{% static "assets/icon_like.svg" %}" alt="like">
+                        {{post.likes.count}}
+                    </li>
+                </ul>
+                {% if user == post.author %}
                 <form action="{% url "post_update" post.pk %}" method="GET">
                     {% csrf_token %}
                     <button>수정하기</button>
@@ -30,8 +44,8 @@
                     {% csrf_token %}
                     <button type="button" class="delete-btn">삭제하기</button>
                 </form>
+                {% endif %}
             </div>
-            {% endif %}
         </div>
     </section>
     <section class="post-area center-content">
@@ -39,9 +53,17 @@
         <aside>
             <form action="{% url "post_like" post.pk %}" method="POST">
                 {% csrf_token %}
-                <button class="{% if liked %}liked{% endif %}">좋아요</button>
+                <button>
+                    {% if liked %}
+                    <img src="{% static "assets/icon_liked.svg" %}" alt="liked">
+                    {% else %}
+                    <img src="{% static "assets/icon_like.svg" %}" alt="like">
+                    {% endif %}
+                </button>
             </form>
-            <button>공유</button>
+            <button class="share-btn">
+                <img src="{% static "assets/icon_share.svg" %}" alt="share">
+            </button>
         </aside>
         <article>
             <h3 class="ir-hidden">내용</h3>
@@ -115,6 +137,7 @@
 <script>
     const comment_mod_btns = document.querySelectorAll(".comment-area li .mod-btn");
     const delete_btns = document.querySelectorAll(".delete-btn");
+    const share_btn = document.querySelector(".share-btn");
     
     comment_mod_btns.forEach(mod_btn => {
         mod_btn.addEventListener('click', ()=>{
@@ -135,6 +158,19 @@
                 form.submit();
             }
         });
+    });
+
+    share_btn.addEventListener('click', ()=>{
+        const this_url = window.location.href;
+        let tmp = document.createElement('input');
+
+        document.body.appendChild(tmp);
+        tmp.value = this_url;
+        tmp.select();
+        document.execCommand("copy");
+        document.body.removeChild(tmp);
+        
+        alert("URL이 복사되었습니다"); 
     });
 </script>
 {% endblock %}
