@@ -1,4 +1,5 @@
 {% extends "base/base.html" %}
+{% load static %}
 {% load blog_tags %}
 {% block content %}
 <main class="post-list-wrapper">
@@ -40,7 +41,23 @@
                     <img src="{{post.thumbnail_image.url}}" alt="">
                     {% endif %}
                     <div class="content-box">
-                        <p class="title">{{post.title}}</p>
+                        <div class="title-area">
+                            <b class="title">{{post.title}}</b>
+                            <ul>
+                                <li>
+                                    <img src="{% static "assets/icon_view.svg" %}" alt="view">
+                                    {{post.view_count}}
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/icon_comment.svg" %}" alt="comment">
+                                    {{post.comments.count}}
+                                </li>
+                                <li>
+                                    <img src="{% static "assets/icon_liked.svg" %}" alt="liked">
+                                    {{post.likes.count}}
+                                </li>
+                            </ul>
+                        </div>
                         <ul class="tag-list">
                             {% for tag in post.tags.all %}
                             <li>{{tag.name}}</li>

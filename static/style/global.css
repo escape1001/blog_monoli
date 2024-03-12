@@ -170,9 +170,35 @@ main{
 	flex-grow: 1;
 }
 
-.post-list>li .content-box .title{
-	font-size: var(--font-size-big);
+.post-list>li .content-box .title-area{
 	padding-bottom: 1rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	gap:1rem;
+	flex-wrap: wrap;
+}
+
+.post-list>li .content-box .title-area .title{
+	font-size: var(--font-size-big);
+}
+
+.post-list>li .content-box .title-area ul{
+	display: flex;
+	gap:.5rem;
+}
+
+.post-list>li .content-box .title-area ul li{
+	flex-shrink: 0;
+	display: flex;
+	align-items: center;
+	gap:.2rem;
+}
+
+.post-list>li .content-box .title-area ul img{
+	width: 2rem;
+	height: 2rem;
+	object-fit: contain;
 }
 
 .post-list>li .info-box{
