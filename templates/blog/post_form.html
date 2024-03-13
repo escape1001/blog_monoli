@@ -11,4 +11,18 @@
         </p>
     </form>
 </main>
+<script>
+    const recommend_raw = "{{request.POST.recommend}}";
+    if(recommend_raw){
+        const contents_area = document.querySelector("#id_contents");
+        const recommend = `
+            <h4>[블로그씨 질문]</h4>
+            <p>${recommend_raw}</p>
+            <hr/>
+            <br/>
+        `;
+
+        contents_area.value = recommend;
+    }
+</script>
 {% endblock %}

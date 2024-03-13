@@ -63,3 +63,6 @@ button{
 	background:none;
 	border: none;
 }
+textarea{
+	resize: none;
+}

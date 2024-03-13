@@ -4,9 +4,14 @@
 <main class="userhome-wrapper center-content">
     <h2 class="section-title">{{profile.nickname}}의 블로그</h2>
     {% if request.user == author %}
-    <section class="recommend-area">
+    <section class="recommend-area hidden">
         <h3 class="ir-hidden">글감 추천</h3>
-        <div>글감 이런건 어떠세요?</div>
+        <form action="{% url "post_create" %}" method="POST">
+            {% csrf_token %}
+            <textarea name="recommend" readonly>
+            </textarea>
+            <button class="default-btn reverse">글 쓰러 가기</button>
+        </form>
     </section>
     {% endif %}
     <div class="flex-area">
@@ -74,4 +79,79 @@
         </section>
     </div>
 </main>
+<script>
+    const url = "https://open-api.jejucodingcamp.workers.dev/chat";
+    const username = "{{profile.nickname}}";
+    const recommend_area = document.querySelector(".recommend-area");
+    const recommend_textarea = document.querySelector(".recommend-area textarea");
+
+    const setRecommend = (content) => {
+        recommend_textarea.value = "🍀 "+ content;
+        recommend_area.classList.remove("hidden");
+    };
+
+    const sendRequest = async(data) => {    
+        try{
+            const res = await fetch(url,{
+                method:"POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+    
+            if (!res.ok) {
+                throw new Error(`HTTP error! Status: ${response.status}`);
+            }
+    
+            const answer = await res.json();
+            const content = answer.choices[0].message.content;
+            setRecommend(content);
+        } catch(error){
+            console.error(error);
+        }
+    };
+
+    if (recommend_area){
+        const data = [
+            {
+                "role": "system",
+                "content": `
+                    너는 블로그 포스팅 주제를 추천하는 봇이야. 상냥한 말투를 가졌고 이름은 '블로그씨'야.
+                    답변 문장은 항상 3문장 이내로, 각 문장은 줄 띄움으로 구분해줘.
+                    대화는 한번 이상 이어지지 않을 거야. 답변은 3문장 안에서 끝내줘.
+                    <답변예시>를 참조하되 같은 내용을 출력해서는 안돼.
+                    만약 처음 내놓은 답변이 <틀린답변예시>와 같은 내용일 경우 다시 고민해줘.
+                    네가 참조할 변수들은 아래와 같아.
+
+                    <카테고리>취미, 여행, IT, 음식</카테고리>
+
+                    <답변예시>
+                    안녕하세요 000님! 블로그씨의 새로운 취미는 다꾸랍니다~ 취미 부자인 내가 하는 취미들을 사진과 함께 공유해주세요~
+                    </답변예시>
+
+                    <틀린답변예시>
+                    블로그씨의 새로운 여행지 추천 포스팅이 어떠세요? 세계 각지의 멋진 여행지를 소개해드릴게요~ 함께 꿈나라 여행을 떠나보세요!
+
+                    틀린 이유 : 세계 각지의 멋진 여행지를 소개해준다고 했으나 실제로 구체적인 여행지를 제시하진 않았음.
+                    </틀린답변예시>
+                `
+            },
+            {
+                "role" : "assistant",
+                "content" : `안녕하세요 ${username}님!`
+            },
+            {
+                "role": "user",
+                "content": `
+                    <카테고리>중에서 랜덤하게 주제 하나를 고르고 <사용자이름>을 참조해서 답변을 반환해줘.
+
+                    <사용자이름>${username}</사용자이름>
+                `
+            }
+        ];
+
+        sendRequest(data);
+    }
+</script>
 {% endblock %}
