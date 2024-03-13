@@ -1,13 +1,13 @@
 from django.views.generic import (
     ListView, DetailView, CreateView, UpdateView, DeleteView, View
 )
-from .models import Post, Comment, Tag, Like, Promotion
-from accounts.models import Profile
-from django.urls import reverse_lazy, reverse
-from django.db.models import Q
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
-from django.db.models import F, Sum, Count
-from .forms import CommentForm
+from blog.models import Post, Comment, Tag, Like, Promotion
+from accounts.models import Profile
+from blog.forms import CommentForm
+from django.db.models import Q
+from django.db.models import F, Count
+from django.urls import reverse_lazy, reverse
 from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
@@ -38,6 +38,7 @@ class Main(ListView):
         
         return context
 
+
 class PostList(ListView):
     model = Post
     ordering = '-pk'
@@ -47,7 +48,6 @@ class PostList(ListView):
 
         q = self.request.GET.get('q', '')
         tags = self.request.GET.getlist('tag')
-
 
         if q :
             queryset = queryset.filter(
@@ -68,6 +68,7 @@ class PostList(ListView):
         context['tags'] = tags
         
         return context
+
 
 class PostDetail(DetailView):
     model = Post
@@ -117,17 +118,19 @@ class PostDetail(DetailView):
             comment.save()
         return super().get(request, *args, **kwargs) 
 
+
 class PostCreate(LoginRequiredMixin, CreateView):
     model = Post
     fields = ['title', 'contents', 'thumbnail_image', 'tags']
-    
-    def get_success_url(self):
-        return reverse('post_detail', args=[str(self.object.pk)])
 
     def form_valid(self, form):
         video = form.save(commit=False)
         video.author = self.request.user
         return super().form_valid(form)
+    
+    def get_success_url(self):
+        return reverse('post_detail', args=[str(self.object.pk)])
+
 
 class PostUpdate(UserPassesTestMixin, UpdateView):
     model = Post
@@ -138,6 +141,7 @@ class PostUpdate(UserPassesTestMixin, UpdateView):
 
     def get_success_url(self):
         return reverse('post_detail', args=[str(self.object.pk)])
+
 
 class PostDelete(UserPassesTestMixin, DeleteView):
     model = Post
@@ -158,14 +162,15 @@ class CommentUpdate(UserPassesTestMixin, UpdateView):
     def get_success_url(self):
         return reverse('post_detail', args=[str(self.object.post.pk)])
     
+
 class CommentDelete(UserPassesTestMixin, DeleteView):
     model = Comment
 
-    def get_success_url(self):
-        return reverse('post_detail', args=[str(self.object.post.pk)])
-
     def test_func(self):
         return self.request.user == self.get_object().author
+
+    def get_success_url(self):
+        return reverse('post_detail', args=[str(self.object.post.pk)])
     
 
 class LikeToggle(LoginRequiredMixin, View):
@@ -178,7 +183,6 @@ class LikeToggle(LoginRequiredMixin, View):
         try:
             like_obj = Like.objects.get(post_id=post_pk, author=author)
             like_obj.delete()
-
         except Like.DoesNotExist:
             like_obj = Like.objects.create(post_id=post_pk, author=author)
             like_obj.save()

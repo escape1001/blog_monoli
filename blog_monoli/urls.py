@@ -7,6 +7,9 @@
 /post/create                    [blog:post_form] # 포스트 작성 / 사용자만 접근 가능
 /post/update/<int:pk>           [blog:post_form] # 포스트 수정
 /post/delete/<int:pk>           [blog:post_delete] # 포스트 삭제
+/post/update_comment/<int:pk>/  [blog:comment_update] # 덧글 수정
+/post/delete_comment/<int:pk>/  [blog:comment_delete] # 덧글 삭제
+/post/like/<int:pk>/            [blog:post_like] # 좋아요 토글
 /accounts/signup
 /accounts/login
 /accounts/logout                # 로그인한 사용자만 접근 가능

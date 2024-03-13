@@ -1,17 +1,17 @@
-from django.conf import settings
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView, UpdateView
+from django.contrib.auth.models import User
+from django.contrib.auth import login as auth_login
 from blog.models import Post, Comment, Like
 from accounts.models import Profile
-from django.contrib.auth.models import User
-from django.db.models import Count
 from django.db.models import Q
-from django.contrib.auth import login as auth_login
-from django.contrib.auth.views import PasswordChangeView
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.db.models import Count
+from django.shortcuts import render, redirect, get_object_or_404
+from django.conf import settings
 
 
 
