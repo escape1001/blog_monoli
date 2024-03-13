@@ -147,6 +147,7 @@ main{
 	border-radius: .5rem;
 	transition: all .2s ease-in-out;
 	overflow: hidden;
+	background-color: var(--color-white);
 }
 
 .post-list>li:hover{
@@ -165,7 +166,6 @@ main{
 	height: 100%;
 	display: flex;
 	flex-direction: column;
-	background-color: var(--color-white);
 }
 
 .post-list>li img{
@@ -742,6 +742,15 @@ footer{
 .mypage-wrapper .profile-area .text-area b{
 	font-weight: 800;
 	padding-right: 2rem;
+}
+
+.mypage-wrapper .profile-area .btn-area{
+	flex-grow: 1;
+	align-self: flex-start;
+	display: flex;
+	align-items: start;
+	justify-content: flex-end;
+	gap:1rem;
 }
 
 .mypage-wrapper .profile-area+section{
