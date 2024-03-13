@@ -21,6 +21,20 @@
 	box-sizing: border-box;
 }
 
+html{
+    height:100%;
+	font-size: 10px;
+}
+
+body{
+	height:100%;
+	font-size: var(--font-size-default);
+	font-family: sans-serif;
+	color: var(--color-dark);
+	background-color: var(--color-light);
+}
+
+/* 공통 스타일링 */
 .center-content{
 	width: 90%;
 	max-width: var(--container-max-width);
@@ -38,92 +52,6 @@
 	width: 1px;
 	height: 1px;
 	overflow: hidden;
-}
-
-@keyframes fadeIn {
-	from{
-		opacity: 0;
-	}
-	to{
-		opacity: 1;
-	}
-}
-
-html{
-    height:100%;
-	font-size: 10px;
-}
-
-body{
-	height:100%;
-	font-size: var(--font-size-default);
-	color: var(--color-dark);
-	background-color: var(--color-light);
-}
-
-
-/* 헤더 */
-header{
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-	padding:2rem 5%;
-}
-
-header h1{
-	color: var(--color-point);
-	font-weight: 800;
-	font-size: var(--font-size-huge);
-}
-
-header ul{
-	display: flex;
-	align-items: center;
-	gap:2rem;
-	font-size: var(--font-size-big);
-}
-
-header .hello{
-	padding-right: 1rem;
-	color:var(--color-point);
-}
-
-header ul li a:hover{
-	text-decoration: underline;
-	color: initial !important;
-}
-
-/* 메인 */
-main{
-	min-height: 100vh;
-}
-
-.promo-banner a{
-	display: block;
-	position: relative;
-}
-
-.promo-banner img{
-	aspect-ratio: 10/3;
-	object-fit: cover;
-	opacity: .7;
-}
-
-.promo-banner .text{
-	position: absolute;
-	left:0;
-	right:0;
-	top:0;
-	bottom: 0;
-	display: flex;
-	align-items: center;
-}
-
-.promo-banner .text pre{
-	font-size: var(--font-size-huge);
-	font-weight: 600;
-	line-height: 1.5;
-	overflow: visible;
 }
 
 .section-wrapper{
@@ -331,12 +259,87 @@ main{
 	color:var(--color-point) !important;
 }
 
+@keyframes fadeIn {
+	from{
+		opacity: 0;
+	}
+	to{
+		opacity: 1;
+	}
+}
+
+/* base */
+main{
+	min-height: 100vh;
+}
+
+header{
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding:2rem 5%;
+}
+
+header h1{
+	color: var(--color-point);
+	font-weight: 800;
+	font-size: var(--font-size-huge);
+}
+
+header ul{
+	display: flex;
+	align-items: center;
+	gap:2rem;
+	font-size: var(--font-size-big);
+}
+
+header .hello{
+	padding-right: 1rem;
+	color:var(--color-point);
+}
+
+header ul li a:hover{
+	text-decoration: underline;
+	color: initial !important;
+}
+
 footer{
 	margin-top: 15rem;
 	padding:8rem 0 5rem;
 	text-align: center;
 	background-color: var(--color-light-grey);
 }
+
+/* 개별 스타일링 */
+/* 메인 */
+.promo-banner a{
+	display: block;
+	position: relative;
+}
+
+.promo-banner img{
+	aspect-ratio: 10/3;
+	object-fit: cover;
+	opacity: .7;
+}
+
+.promo-banner .text{
+	position: absolute;
+	left:0;
+	right:0;
+	top:0;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+}
+
+.promo-banner .text pre{
+	font-size: var(--font-size-huge);
+	font-weight: 600;
+	line-height: 1.5;
+	overflow: visible;
+}
+
 
 /* post-detail-wrapper */
 .post-detail-wrapper .title-area{
@@ -546,7 +549,6 @@ footer{
 	height: 3rem;
 	object-fit: contain;
 }
-
 
 /* post-list-wrapper */
 .post-list-wrapper .search-area{
