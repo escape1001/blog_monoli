@@ -4,15 +4,15 @@ venv
 *.pyc
 *.pyc
 blog_monoli/__pycache__
-*.png
-*.webp
 static/assets/banner/.DS_Store
-*.jpg
 static/assets/.DS_Store
 static/assets/.DS_Store
 *.pyc
 blog_monoli/__pycache__/settings.cpython-311.pyc
-*.jpeg
+# *.png
+# *.webp
+# *.jpg
+# *.jpeg
 *.avif
 *.pyc
 media/profile/2024/03/13/favicon2.ico
