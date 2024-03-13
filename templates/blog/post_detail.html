@@ -36,10 +36,7 @@
                     </li>
                 </ul>
                 {% if user == post.author %}
-                <form action="{% url "post_update" post.pk %}" method="GET">
-                    {% csrf_token %}
-                    <button>수정하기</button>
-                </form>
+                <a href="{% url "post_update" post.pk %}">수정하기</a>
                 <form action="{% url "post_delete" post.pk %}" method="POST">
                     {% csrf_token %}
                     <button type="button" class="delete-btn">삭제하기</button>

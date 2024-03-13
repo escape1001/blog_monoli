@@ -18,3 +18,5 @@ blog_monoli/__pycache__/settings.cpython-311.pyc
 media/profile/2024/03/13/favicon2.ico
 *.pyc
 .DS_Store
+*.pyc
+.DS_Store
