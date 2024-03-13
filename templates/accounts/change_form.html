@@ -1,0 +1,13 @@
+{% extends "base/base.html" %}
+{% block content %}
+<main class="accounts-form-wrapper center-content">
+    <h2 class="section-title">개인정보 수정</h2>
+    <form method="POST" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+        <p class="btn-area">
+            <button class="default-btn reverse">작성 완료</button>
+        </p>
+    </form>
+</main>
+{% endblock %}

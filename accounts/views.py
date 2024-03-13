@@ -3,14 +3,15 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
 from django.shortcuts import render, redirect, get_object_or_404
-from django.views.generic import CreateView
+from django.views.generic import CreateView, UpdateView
 from blog.models import Post, Comment, Like
 from accounts.models import Profile
 from django.contrib.auth.models import User
 from django.db.models import Count
 from django.db.models import Q
-from django.urls import reverse
 from django.contrib.auth import login as auth_login
+from django.contrib.auth.views import PasswordChangeView
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 
 
@@ -69,3 +70,13 @@ def mypage(request):
     }
 
     return render(request, 'accounts/mypage.html', context)
+
+
+class UpdatePassword(LoginRequiredMixin, PasswordChangeView):
+    template_name = 'accounts/change_form.html'
+    success_url = settings.LOGIN_REDIRECT_URL
+
+    
+class UpdateProfile(UpdateView):
+update_password = UpdatePassword.as_view()
+update_profile = UpdateProfile.as_view()
