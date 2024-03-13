@@ -6,7 +6,7 @@
     <section class="profile-area">
         <h3 class="ir-hidden">가입정보</h3>
         <div class="center-content">
-            {% if author_info.profile_image %}
+            {% if profile.profile_image %}
             <img class="profile-image" src="{{profile.profile_image.url}}" alt="{{profile.nickname}}의 프로필 이미지">
             {% else %}
             <img class="profile-image" src="{% static "assets/default_profile.png" %}">
@@ -20,6 +20,14 @@
                     <b>닉네임</b>
                     <span>{{profile.nickname}}</span>
                 </p>
+                <p>
+                    <b>자기소개</b>
+                    <span>{{profile.introduce}}</span>
+                </p>
+            </div>
+            <div>
+                <a href="{% url "update_password" %}">비밀번호 수정</a>
+                <a href="{% url "update_profile" %}">프로필 수정</a>
             </div>
         </div>
     </section>

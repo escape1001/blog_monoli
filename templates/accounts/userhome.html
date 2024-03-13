@@ -18,7 +18,7 @@
         <section class="profile-area">
             <h3 class="ir-hidden">유저 프로필</h3>
             <div class="">
-                {% if author_info.profile_image %}
+                {% if profile.profile_image %}
                 <img class="profile-image" src="{{profile.profile_image.url}}" alt="{{profile.nickname}}의 프로필 이미지">
                 {% else %}
                 <img class="profile-image" src="{% static "assets/default_profile.png" %}">
@@ -26,6 +26,9 @@
                 <div class="text-area">
                     <p>
                         {{profile.nickname}}
+                    </p>
+                    <p>
+                        {{profile.introduce}}
                     </p>
                 </div>
             </div>

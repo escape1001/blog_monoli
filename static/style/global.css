@@ -807,8 +807,12 @@ footer{
 
 .userhome-wrapper .profile-area .text-area{
 	padding-top: 3rem;
-	font-size: var(--font-size-big);
+}
+
+.userhome-wrapper .profile-area .text-area p:first-child{
 	font-weight: 600;
+	font-size: var(--font-size-big);
+	padding-bottom: 2rem;
 }
 
 .userhome-wrapper .post-area{

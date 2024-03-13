@@ -28,7 +28,6 @@ class Signup(CreateView):
 
         return redirect("/accounts/mypage")
 
-signup = Signup.as_view()
 
 login = LoginView.as_view(
     template_name = "accounts/accounts_form.html",
@@ -37,7 +36,6 @@ login = LoginView.as_view(
 logout = LogoutView.as_view(
     next_page=settings.LOGIN_REDIRECT_URL,
 )
-
 
 def userhome(request, username):
     user_obj = get_object_or_404(User, username=username)
@@ -76,7 +74,18 @@ class UpdatePassword(LoginRequiredMixin, PasswordChangeView):
     template_name = 'accounts/change_form.html'
     success_url = settings.LOGIN_REDIRECT_URL
 
+
+class UpdateProfile(LoginRequiredMixin, UpdateView):
+    model = Profile
+    fields = ["nickname", "introduce", "profile_image"]
+    template_name = 'accounts/change_form.html'
+    success_url = settings.LOGIN_REDIRECT_URL
+
+    def get_object(self):
+        return get_object_or_404(Profile, user=self.request.user)
+
+
     
-class UpdateProfile(UpdateView):
+signup = Signup.as_view()
 update_password = UpdatePassword.as_view()
 update_profile = UpdateProfile.as_view()
