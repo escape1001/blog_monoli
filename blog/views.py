@@ -12,6 +12,8 @@ from django.http import HttpResponseRedirect
 from django.urls import reverse
 from django.contrib.auth.decorators import login_required
 from django.utils.decorators import method_decorator
+from django.shortcuts import get_object_or_404
+
 
 
 class Main(ListView):
@@ -72,7 +74,7 @@ class PostDetail(DetailView):
 
     def get_object(self, queryset=None):
         pk = self.kwargs.get('pk')
-        post = Post.objects.get(pk=pk)
+        post = get_object_or_404(Post, pk=pk)
         post.view_count += 1
         post.save()
         return super().get_object(queryset)

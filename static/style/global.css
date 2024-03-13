@@ -818,3 +818,20 @@ footer{
 .userhome-wrapper .post-area .empty{
 	border:none;
 }
+
+/* error-wrapper */
+.error-wrapper{
+	min-height: 70vh;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	gap:4rem;
+	font-size: var(--font-size-bigger);
+	font-weight: 600;
+}
+
+.error-wrapper img{
+	width: 90%;
+	max-width: 50rem;
+}

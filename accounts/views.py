@@ -2,7 +2,7 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.views import LoginView, LogoutView
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.views.generic import CreateView
 from blog.models import Post, Comment, Like
 from accounts.models import Profile
@@ -39,7 +39,7 @@ logout = LogoutView.as_view(
 
 
 def userhome(request, username):
-    user_obj = User.objects.get(username=username)
+    user_obj = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user_obj)
     posts = Post.objects.filter(author=user_obj)
 
